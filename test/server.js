@@ -19,7 +19,7 @@ describe('ExpressPeerServer', function() {
       });
 
       it('should accept valid key/ip pairs', function(done) {
-        p._checkKey('peerjs', 'myip', function(response) {
+        p._checkKey('js', 'myip', function(response) {
           expect(response).to.be(null);
           done();
         });
@@ -27,7 +27,7 @@ describe('ExpressPeerServer', function() {
 
       it('should reject ips that are at their limit', function(done) {
         p._options.ip_limit = 0;
-        p._checkKey('peerjs', 'myip', function(response) {
+        p._checkKey('js', 'myip', function(response) {
           expect(response).to.be('myip has reached its concurrent user limit');
           done();
         });
@@ -35,7 +35,7 @@ describe('ExpressPeerServer', function() {
 
       it('should reject when the server is at its limit', function(done) {
         p._options.concurrent_limit = 0;
-        p._checkKey('peerjs', 'myip', function(response) {
+        p._checkKey('js', 'myip', function(response) {
           expect(response).to.be('Server has reached its concurrent user limit');
           done();
         });
@@ -46,20 +46,20 @@ describe('ExpressPeerServer', function() {
       before(function() {
         var fake = {ip: '0.0.0.0'};
         p._ips[fake.ip] = 1;
-        p._clients['peerjs'] = {};
-        p._clients['peerjs']['test'] = fake;
+        p._clients['js'] = {};
+        p._clients['js']['test'] = fake;
       });
 
       it('should decrement the number of ips being used and remove the connection', function() {
         expect(p._ips['0.0.0.0']).to.be(1);
-        p._removePeer('peerjs', 'test');
+        p._removePeer('js', 'test');
         expect(p._ips['0.0.0.0']).to.be(0);
         expect(p._clients['peerjs']['test']).to.be(undefined);
       });
     });
 
     describe('#_handleTransmission', function() {
-      var KEY = 'peerjs';
+      var KEY = 'js';
       var ID = 'test';
 
       before(function() {
