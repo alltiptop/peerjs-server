@@ -4,7 +4,7 @@
   "description": "PeerJS server component",
   "main": "lib/index.js",
   "bin": {
-    "peerjs": "./bin/peerjs"
+    "peerjs": "./bin/js"
   },
   "repository": {
     "type": "git",
